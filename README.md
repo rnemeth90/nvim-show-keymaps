@@ -18,13 +18,8 @@ A Neovim plugin that displays all active keybindings in a centered floating wind
 
 ### lazy.nvim
 
-```lua
-{
-  dir = "~/path/to/nvim-show-keymaps",
-  config = function()
-    require("plugin-show-keymaps").setup()
-  end,
-}
+```bash
+return { "rnemeth90/nvim-show-keymaps" }
 ```
 
 ### Manual (symlink)
@@ -33,6 +28,7 @@ A Neovim plugin that displays all active keybindings in a centered floating wind
 git clone https://github.com/rnemeth90/nvim-show-keymaps
 cd nvim-show-keymaps
 ./install.sh
+# then include in whatever file you load plugins with
 ```
 
 ## Usage
@@ -73,17 +69,6 @@ require("plugin-show-keymaps").show_keymaps()
 require("plugin-show-keymaps").show_keymaps("n")
 ```
 
-## Structure
-
-```
-lua/plugin-show-keymaps/
-  init.lua      ← setup() and show_keymaps() entry points
-  keymaps.lua   ← keymap collection and floating window logic
-  utils.lua     ← utility helpers
-plugin/
-  plugin-show-keymaps.vim  ← registers :Keymaps and :KeymapsMode commands
-install.sh      ← symlink installer for local development
-```
 
 ## Development
 
