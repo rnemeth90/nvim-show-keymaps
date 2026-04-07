@@ -1,0 +1,24 @@
+# Neovim swap / backup / undo files
+*.swp
+*.swo
+*.swn
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Lua compiled bytecode
+*.luac
+
+# luacheck / selene caches
+.luacheckcache
+.selene.toml
+
+# Editor configs
+.idea/
+.vscode/
+
+# Test dependency downloads (used by CI)
+vendor/

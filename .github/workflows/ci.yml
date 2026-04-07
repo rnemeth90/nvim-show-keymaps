@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Neovim (stable)
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: stable
+
+      - name: Cache plenary.nvim
+        uses: actions/cache@v4
+        with:
+          path: /tmp/plenary.nvim
+          key: plenary-nvim-${{ runner.os }}-${{ hashFiles('.github/workflows/ci.yml') }}
+
+      - name: Install plenary.nvim
+        run: |
+          if [ ! -d /tmp/plenary.nvim ]; then
+            git clone --depth 1 https://github.com/nvim-lua/plenary.nvim /tmp/plenary.nvim
+          fi
+
+      - name: Run tests
+        run: |
+          nvim --headless -u tests/minimal_init.lua \
+            -c "lua require('plenary.test_harness').test_directory('tests/', { sequential = true })" \
+            +qa
+        env:
+          PLENARY_PATH: /tmp/plenary.nvim
