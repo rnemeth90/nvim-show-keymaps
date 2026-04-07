@@ -3,8 +3,7 @@ set -euo pipefail
 
 PLUGIN_NAME="nvim-show-keymaps"
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# NVIM_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/${NVIM_APPNAME:-nvim}"
-NVIM_DATA_DIR="${XDG_DATA_HOME:-$HOME}/.local/share/nvim-lazy"
+NVIM_DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/${NVIM_APPNAME:-nvim}"
 PACK_DIR="$NVIM_DATA_DIR/site/pack/$PLUGIN_NAME/start/$PLUGIN_NAME"
 
 echo "Installing $PLUGIN_NAME..."

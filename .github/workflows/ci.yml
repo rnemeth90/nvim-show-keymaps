@@ -21,11 +21,15 @@ jobs:
           neovim: true
           version: stable
 
+      - name: Get current week
+        id: date
+        run: echo "week=$(date +'%Y-%U')" >> "$GITHUB_OUTPUT"
+
       - name: Cache plenary.nvim
         uses: actions/cache@v4
         with:
           path: /tmp/plenary.nvim
-          key: plenary-nvim-${{ runner.os }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          key: plenary-nvim-${{ runner.os }}-${{ steps.date.outputs.week }}
 
       - name: Install plenary.nvim
         run: |
