@@ -5,14 +5,19 @@ A Neovim plugin that displays all active keybindings in a centered floating wind
 ## Features
 
 - Shows all keymaps across Normal, Insert, Visual, Command, Terminal, and more
+- Includes buffer-local keymaps (LSP, filetype, etc.), tagged `[buffer]`
 - Filter keymaps by a specific mode
+- Sorted alphabetically, with each map listed once (a Visual map isn't repeated under Visual Block)
+- Leader maps shown as `<leader>…` and grouped by prefix, using group names from
+  [which-key](https://github.com/folke/which-key.nvim) when it's installed
+- Hides `<Plug>` mappings; optionally hides maps without a description
+- Long mapping targets are truncated so descriptions stay visible
 - Centered floating window with rounded borders
-- Close with `q` or `<Esc>`
-- Displays key, mapping target, and description (if set)
+- Close with `q`, `<Esc>`, or by moving to another window
 
 ## Requirements
 
-- Neovim 0.8+
+- Neovim 0.9+
 
 ## Installation
 
@@ -69,6 +74,23 @@ require("plugin-show-keymaps").show_keymaps()
 require("plugin-show-keymaps").show_keymaps("n")
 ```
 
+## Configuration
+
+`setup()` is optional. These are the defaults:
+
+```lua
+require("plugin-show-keymaps").setup({
+  -- Hide <Plug> mappings (internal plugin hooks, not meant to be pressed)
+  hide_plug = true,
+  -- Only list mappings that have a description
+  desc_only = false,
+  -- Truncate the mapping target to this many characters (0 = no limit)
+  rhs_max_width = 40,
+  -- Extra names for <leader> groups, e.g. { g = "git" }.
+  -- Group names from which-key specs are picked up automatically.
+  groups = {},
+})
+```
 
 ## Development
 
